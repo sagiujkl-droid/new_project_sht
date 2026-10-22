@@ -1,0 +1,300 @@
+:root {
+    --silver: #c0c0c0;
+    --silver-light: #e8e8e8;
+    --silver-dark: #8a8a8a;
+    --black: #0a0a0a;
+    --dark-gray: #1a1a1a;
+    --white: #ffffff;
+    --glass: rgba(255, 255, 255, 0.05);
+    --border: rgba(192, 192, 192, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--black);
+    color: var(--silver-light);
+    overflow: hidden;
+    /* Чтобы фоновые телефоны не создавали скролл */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* --- ФОН: ЛЕТАЮЩИЕ ТЕЛЕФОНЫ --- */
+.bg-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    /* Чтобы не мешать кликам */
+}
+
+/* Стиль одного телефона */
+.phone-icon {
+    position: absolute;
+    width: 40px;
+    height: 70px;
+    border: 2px solid var(--silver-dark);
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+    box-shadow: 0 0 15px rgba(192, 192, 192, 0.1);
+    opacity: 0.4;
+    animation: floatPhone linear infinite;
+}
+
+/* Внутренняя часть экрана телефона */
+.phone-icon::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 4px;
+    right: 4px;
+    bottom: 8px;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Анимация полета (движение по диагонали и вращение) */
+@keyframes floatPhone {
+    0% {
+        transform: translateY(110vh) rotate(0deg) scale(0.8);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.5;
+    }
+
+    90% {
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateY(-20vh) rotate(360deg) scale(1.2);
+        opacity: 0;
+    }
+}
+
+/* --- ИНТЕРФЕЙС --- */
+.app-wrapper {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 800px;
+    height: 90vh;
+    display: flex;
+    flex-direction: column;
+    background: rgba(10, 10, 10, 0.85);
+    /* Полупрозрачный фон для читаемости */
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05);
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 15px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: var(--white);
+}
+
+h1 span {
+    font-weight: 600;
+    color: var(--silver);
+    text-shadow: 0 0 10px rgba(192, 192, 192, 0.5);
+}
+
+.subtitle {
+    font-size: 0.8rem;
+    color: var(--silver-dark);
+    letter-spacing: 1px;
+    margin-top: 5px;
+}
+
+/* Чат */
+.chat-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+}
+
+.chat-history {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Стилизация скроллбара */
+.chat-history::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-history::-webkit-scrollbar-track {
+    background: var(--black);
+}
+
+.chat-history::-webkit-scrollbar-thumb {
+    background: var(--silver-dark);
+    border-radius: 3px;
+}
+
+/* Сообщения */
+.message {
+    display: flex;
+    gap: 12px;
+    max-width: 85%;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.msg-content {
+    padding: 12px 16px;
+    border-radius: 12px;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+/* AI сообщение */
+.ai-message .msg-content {
+    background: rgba(192, 192, 192, 0.1);
+    border: 1px solid var(--border);
+    color: var(--silver-light);
+    border-top-left-radius: 2px;
+}
+
+.ai-message .avatar {
+    width: 35px;
+    height: 35px;
+    background: linear-gradient(135deg, var(--silver), var(--silver-dark));
+    color: var(--black);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+/* Пользователь */
+.user-message {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.user-message .msg-content {
+    background: var(--silver);
+    color: var(--black);
+    border-top-right-radius: 2px;
+    font-weight: 500;
+}
+
+/* Инпут */
+.input-area {
+    display: flex;
+    gap: 10px;
+    padding: 15px;
+    border-top: 1px solid var(--border);
+    background: rgba(0, 0, 0, 0.6);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+#userInput {
+    flex: 1;
+    padding: 14px 18px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    color: var(--white);
+    font-size: 1rem;
+    outline: none;
+    transition: 0.2s;
+}
+
+#userInput:focus {
+    border-color: var(--silver);
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(192, 192, 192, 0.2);
+}
+
+#sendBtn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--silver-light), var(--silver-dark));
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--black);
+    transition: 0.2s;
+}
+
+#sendBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(192, 192, 192, 0.4);
+}
+
+#sendBtn:active {
+    transform: scale(0.95);
+}
+
+#sendBtn svg {
+    width: 22px;
+    height: 22px;
+}
+
+/* Адаптивность */
+@media (max-width: 600px) {
+    .app-wrapper {
+        height: 100vh;
+        border-radius: 0;
+        border: none;
+        padding: 10px;
+    }
+
+    .message {
+        max-width: 95%;
+    }
+}

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SewroAI — Интеллектуальный помощник</title>
+    <link rel="stylesheet" href="index.css">
+    <!-- Шрифт для технологичного вида -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Фон с летающими телефонами -->
+    <div class="bg-container" id="bgContainer"></div>
+
+    <!-- Основной интерфейс -->
+    <div class="app-wrapper">
+        <header>
+            <h1>Sewro<span>AI</span></h1>
+            <p class="subtitle">Silver Edition • Knowledge Engine</p>
+        </header>
+
+        <main class="chat-container">
+            <div class="chat-history" id="chatHistory">
+                <!-- Приветственное сообщение -->
+                <div class="message ai-message">
+                    <div class="avatar">S</div>
+                    <div class="msg-content">
+                        Привет. Я SewroAI. Спроси меня о чём угодно.
+                        <br><small>(Мои знания ограничены возможностями бесплатного API)</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <input type="text" id="userInput" placeholder="Введите ваш вопрос..." autocomplete="off">
+                <button id="sendBtn" title="Отправить">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+                    </svg>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
